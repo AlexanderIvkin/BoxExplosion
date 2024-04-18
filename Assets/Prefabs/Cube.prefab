@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.79, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -147,9 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01475e3fc9abdf042b2c4f09a06ccf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boxPrefab: {fileID: 1026860653464364921}
+  _currentSeparateChance: 100
   _explosion: {fileID: 6508214065866676888, guid: a5cece93e9900de468d27bc66df0e36b, type: 3}
-  _boxPrefab: {fileID: 4054741405675814237}
-  _currentSeparateChance: 0
 --- !u!114 &4402359838950905538
 MonoBehaviour:
   m_ObjectHideFlags: 0

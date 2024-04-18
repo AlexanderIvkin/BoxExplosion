@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3558352776132189578}
   - component: {fileID: 6508214065866676888}
   - component: {fileID: 4685473783755849267}
-  - component: {fileID: 4735485345568859746}
+  - component: {fileID: -8897521968133957355}
+  - component: {fileID: -6444397061537930401}
   m_Layer: 0
   m_Name: BangEffect
   m_TagString: Untagged
@@ -4831,7 +4832,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &4735485345568859746
+--- !u!114 &-8897521968133957355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4840,7 +4841,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1958782391733840382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 981629b69682c74409390b3dfeb66d0a, type: 3}
+  m_Script: {fileID: 11500000, guid: ba9b92f34b8fc55429fa1eec01843bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifeTime: 1
+--- !u!114 &-6444397061537930401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958782391733840382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e23fbbfafce104487101fca76caaa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

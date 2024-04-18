@@ -1,21 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PressMouseButton))]
+
 public class Box : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _explosion;
-    [SerializeField] private GameObject _boxPrefab;
+    [SerializeField] private Box _boxPrefab;
     [SerializeField] private float _currentSeparateChance;
+    [SerializeField] private ParticleSystem _explosion;
 
     private PressMouseButton _button;
     private Material _material;
     private float _factor = 0.5f;
-
-    public void SetNewLifeProperties()
-    {
-        ChangeColor();
-        ChangeScale();
-        ChangeSeparateChance();
-    }
 
     private void Awake()
     {
@@ -33,41 +28,11 @@ public class Box : MonoBehaviour
         _button.IsPressed -= ChooseBehaviour;
     }
 
-    private void ChooseBehaviour()
+    public void SetNewLifeProperties()
     {
-        int maxChance = 100;
-
-        if (Random.Range(0, maxChance) < _currentSeparateChance)
-        {
-            Separate();
-        }
-        else
-        {
-            Explode();
-        }
-    }
-
-    private void Explode()
-    {
-        Instantiate(_explosion, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-
-    private void Separate()
-    {
-        int minCount = 2;
-        int maxCount = 7;
-
-        int count = Random.Range(minCount, maxCount);
-
-        for (int i = 0; i < count; i++)
-        {
-            GameObject createdBox = Instantiate(_boxPrefab, transform.position, Quaternion.identity);
-
-            createdBox.GetComponent<Box>().SetNewLifeProperties();
-        }
-
-        Destroy(gameObject);
+        ChangeScale();
+        ChangeColor();
+        ChangeSeparateChance();
     }
 
     private void ChangeScale()
@@ -83,5 +48,43 @@ public class Box : MonoBehaviour
     private void ChangeSeparateChance()
     {
         _currentSeparateChance *= _factor;
+    }
+
+    private void ChooseBehaviour()
+    {
+        int maxChance = 100;
+
+        if (Random.Range(0, maxChance) < _currentSeparateChance)
+        {
+            Separate();
+        }
+        else
+        {
+            Explode();
+        }
+    }
+
+    private void Separate()
+    {
+        int minCount = 2;
+        int maxCount = 7;
+
+        int count = Random.Range(minCount, maxCount);
+
+        for (int i = 0; i < count; i++)
+        {
+            Box createdBox = Instantiate(_boxPrefab, transform.position, Random.rotation);
+
+            createdBox.SetNewLifeProperties();
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void Explode()
+    {
+        Instantiate(_explosion, transform.position, Quaternion.identity).transform.localScale *= transform.localScale.magnitude;
+
+        Destroy(gameObject);
     }
 }
