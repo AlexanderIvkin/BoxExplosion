@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MouseButtonChecker))]
+[RequireComponent(typeof(Renderer))]
 
 public class Box : MonoBehaviour
 {
@@ -99,19 +101,7 @@ public class Box : MonoBehaviour
     }
 
     private List<Rigidbody> GetExplodableObjects()
-    {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius);
-
-        List<Rigidbody> boxes = new List<Rigidbody>();
-
-        foreach (Collider hit in hits)
-        {
-            if (hit.attachedRigidbody != null)
-            {
-                boxes.Add(hit.attachedRigidbody);
-            }
-        }
-
-        return boxes;
+    {        
+        return Physics.OverlapSphere(transform.position, _explosionRadius).Where(hit => hit.attachedRigidbody != null).Select(hit => hit.attachedRigidbody).ToList();
     }
 }

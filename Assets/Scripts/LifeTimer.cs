@@ -4,7 +4,7 @@ public class LifeTimer : MonoBehaviour
 {
     private float _delay = 2f;
 
-    private void Update()
+    private void Start()
     {
         Destroy(gameObject, _delay);
     }
