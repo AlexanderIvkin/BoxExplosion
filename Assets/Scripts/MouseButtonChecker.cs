@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PressMouseButton : MonoBehaviour
+public class MouseButtonChecker : MonoBehaviour
 {
     public event Action IsPressed;
 

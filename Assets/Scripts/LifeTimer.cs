@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DestroyAfterDelay : MonoBehaviour
+public class LifeTimer : MonoBehaviour
 {
     private float _delay = 2f;
 

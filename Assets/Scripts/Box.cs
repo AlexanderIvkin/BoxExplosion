@@ -1,20 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PressMouseButton))]
+[RequireComponent(typeof(MouseButtonChecker))]
 
 public class Box : MonoBehaviour
 {
     [SerializeField] private Box _boxPrefab;
     [SerializeField] private float _currentSeparateChance;
     [SerializeField] private ParticleSystem _explosion;
+    [SerializeField] private float _explosionRadius;
+    [SerializeField] private float _explosionForce;
 
-    private PressMouseButton _button;
+    private MouseButtonChecker _button;
     private Material _material;
     private float _factor = 0.5f;
 
     private void Awake()
     {
-        _button = GetComponent<PressMouseButton>();
+        _button = GetComponent<MouseButtonChecker>();
         _material = GetComponent<Renderer>().material;
     }
 
@@ -83,8 +86,32 @@ public class Box : MonoBehaviour
 
     private void Explode()
     {
-        Instantiate(_explosion, transform.position, Quaternion.identity).transform.localScale *= transform.localScale.magnitude;
+        float scaleFactor = 1 / transform.localScale.magnitude;
+
+        Instantiate(_explosion, transform.position, Quaternion.identity).transform.localScale *= scaleFactor;
+
+        foreach (Rigidbody box in GetExplodableObjects())
+        {
+            box.AddExplosionForce(_explosionForce * scaleFactor, transform.position, _explosionRadius * scaleFactor);
+        }
 
         Destroy(gameObject);
+    }
+
+    private List<Rigidbody> GetExplodableObjects()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius);
+
+        List<Rigidbody> boxes = new List<Rigidbody>();
+
+        foreach (Collider hit in hits)
+        {
+            if (hit.attachedRigidbody != null)
+            {
+                boxes.Add(hit.attachedRigidbody);
+            }
+        }
+
+        return boxes;
     }
 }
